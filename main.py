@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 
-from config import Settings, logger
+import datetime
 
-from src.services.http_client import HttpClient
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import datetime
+
+from config import LOCAL_TIMEZONE, Settings, logger
+from src.services.http_client import HttpClient
 
 settings = Settings()
 
 if __name__ == "__main__":
 
-    start_time = datetime.datetime.now(tz=datetime.timezone.utc)
+    start_time = datetime.datetime.now(tz=LOCAL_TIMEZONE)
     logger.info("Start time: " + str(start_time))
 
     http_client = HttpClient(base_url=settings.base_url)
@@ -53,7 +54,7 @@ if __name__ == "__main__":
     for posicion in http_client.generate(paths=urls):
         if posicion["response"]["error"] == 0:
             for pos in posicion["response"]["posiciones"]:
-                pos["timestamp"] = datetime.datetime.now(tz=datetime.timezone.utc)
+                pos["timestamp"] = LOCAL_TIMEZONE.localize(datetime.datetime.now())
                 pos["location"] = {
                     "type": "Point",
                     "coordinates": [pos["longitud"], pos["latitud"]],
@@ -102,5 +103,5 @@ if __name__ == "__main__":
 
     logger.info(
         "Total time: "
-        + str(datetime.datetime.now(tz=datetime.timezone.utc) - start_time)
+        + str(datetime.datetime.now(tz=LOCAL_TIMEZONE) - start_time)
     )

@@ -1,15 +1,11 @@
-import os
-import logging
-from pydantic_settings import BaseSettings
-from dotenv import load_dotenv
 import logging
 import logging.config
+import os
 
-from pydantic import (
-    AnyUrl,
-    Field,
-    HttpUrl,
-)
+import pytz
+from dotenv import load_dotenv
+from pydantic import AnyUrl, Field, HttpUrl
+from pydantic_settings import BaseSettings
 
 load_dotenv()
 
@@ -17,6 +13,8 @@ load_dotenv()
 logging.config.fileConfig("./logging.conf")
 
 logger = logging.getLogger(__name__)
+
+LOCAL_TIMEZONE = pytz.timezone("America/Argentina/Salta")
 
 
 class Settings(BaseSettings):

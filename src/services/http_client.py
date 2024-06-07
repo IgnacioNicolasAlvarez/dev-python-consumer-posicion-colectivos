@@ -1,8 +1,10 @@
-import requests
-import time
-from config import logger
-import os
 import concurrent.futures
+import os
+import time
+
+import requests
+
+from config import logger
 
 
 class HttpClient:

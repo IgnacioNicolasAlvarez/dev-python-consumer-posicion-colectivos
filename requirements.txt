@@ -16,6 +16,7 @@ pydantic-settings==2.3.1
 pydantic_core==2.18.4
 pymongo==4.7.3
 python-dotenv==1.0.1
+pytz==2024.1
 requests==2.32.3
 setuptools==69.0.3
 smmap==5.0.1
