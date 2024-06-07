@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+node_modules/
+vendor/
+*.log
+*.tmp
+*.swp
+
+secret.txt
+backup/
+
+logs/*
